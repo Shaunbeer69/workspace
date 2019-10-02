@@ -1,0 +1,141 @@
+{
+  "version": 1,
+  "projects": {
+    "nx-ngx-emotor": {
+      "projectType": "application",
+      "schematics": {
+        "@nrwl/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "apps/nx-ngx-emotor",
+      "sourceRoot": "apps/nx-ngx-emotor/src",
+      "prefix": "workspace",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/apps/nx-ngx-emotor",
+            "index": "apps/nx-ngx-emotor/src/index.html",
+            "main": "apps/nx-ngx-emotor/src/main.ts",
+            "polyfills": "apps/nx-ngx-emotor/src/polyfills.ts",
+            "tsConfig": "apps/nx-ngx-emotor/tsconfig.app.json",
+            "aot": false,
+            "assets": [
+              "apps/nx-ngx-emotor/src/favicon.ico",
+              "apps/nx-ngx-emotor/src/assets"
+            ],
+            "styles": ["apps/nx-ngx-emotor/src/styles.scss"],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/nx-ngx-emotor/src/environments/environment.ts",
+                  "with": "apps/nx-ngx-emotor/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "nx-ngx-emotor:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "nx-ngx-emotor:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "nx-ngx-emotor:build"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "apps/nx-ngx-emotor/tsconfig.app.json",
+              "apps/nx-ngx-emotor/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!apps/nx-ngx-emotor/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/nx-ngx-emotor/jest.config.js",
+            "tsConfig": "apps/nx-ngx-emotor/tsconfig.spec.json",
+            "setupFile": "apps/nx-ngx-emotor/src/test-setup.ts"
+          }
+        }
+      }
+    },
+    "nx-ngx-emotor-e2e": {
+      "root": "apps/nx-ngx-emotor-e2e",
+      "sourceRoot": "apps/nx-ngx-emotor-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/nx-ngx-emotor-e2e/cypress.json",
+            "tsConfig": "apps/nx-ngx-emotor-e2e/tsconfig.e2e.json",
+            "devServerTarget": "nx-ngx-emotor:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "nx-ngx-emotor:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": ["apps/nx-ngx-emotor-e2e/tsconfig.e2e.json"],
+            "exclude": ["**/node_modules/**", "!apps/nx-ngx-emotor-e2e/**"]
+          }
+        }
+      }
+    }
+  },
+  "cli": {
+    "defaultCollection": "@nrwl/angular"
+  },
+  "schematics": {
+    "@nrwl/angular:application": {
+      "unitTestRunner": "jest",
+      "e2eTestRunner": "cypress"
+    },
+    "@nrwl/angular:library": {
+      "unitTestRunner": "jest"
+    }
+  },
+  "defaultProject": "nx-ngx-emotor"
+}

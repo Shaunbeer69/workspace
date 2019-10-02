@@ -1,0 +1,18 @@
+{
+  "npmScope": "workspace",
+  "implicitDependencies": {
+    "angular.json": "*",
+    "package.json": "*",
+    "tsconfig.json": "*",
+    "tslint.json": "*",
+    "nx.json": "*"
+  },
+  "projects": {
+    "nx-ngx-emotor-e2e": {
+      "tags": []
+    },
+    "nx-ngx-emotor": {
+      "tags": []
+    }
+  }
+}
